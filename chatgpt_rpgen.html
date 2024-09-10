@@ -5,33 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChatGPT Roleplay Button Maker</title>
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
             padding: 20px;
-        }
-
-        textarea,g
-        input {
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 8px;
-            font-size: 16px;
-        }
-
-        button {
-            margin-top: 10px;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #005a9c;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #004080;
         }
 
         .preview {
@@ -53,23 +31,36 @@
             width: 100px;
             height: 100px;
         }
+
+        textarea {
+            resize: none;
+        }
     </style>
 </head>
 
 <body>
 
-    <h1>Make a ChatGPT Roleplay Button</h1>
-<p>Instructions:</p>
-<ol>
-    <li>Write the prompt.</li>
-    <li>Copy the address of the portrait image in Canvas Files and Paste it below.</li>
-    <li>Optionally set the button label.</li>
-    <li>Select Generate Link.</li>
-    <li>Select Copy to Clipboard and paste in the Embed tool in Canvas.</li>
-</ol>
-    <form id="linkForm">
-        <label for="prompt">Prompt:</label><br>
-        <textarea id="prompt" name="prompt" style="height: 9em" placeholder="Enter your prompt here..." style="font-family: Arial, Helvetica, sans-serif;" required>Roleplay Scenario:
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Make a ChatGPT Roleplay Button</h1>
+            <p class="subtitle">Follow the instructions below:</p>
+            <div class="content">
+                <ol>
+                    <li>Write the prompt.</li>
+                    <li>Copy the address of the portrait image in Canvas Files and Paste it below.</li>
+                    <li>Optionally set the button label.</li>
+                    <li>Select Generate Link.</li>
+                    <li>Select Copy to Clipboard and paste it in the Embed tool in Canvas.</li>
+                </ol>
+            </div>
+
+            <form id="linkForm">
+                <div class="field">
+                    <label class="label" for="prompt">Prompt</label>
+                    <div class="control">
+                        <textarea class="textarea" id="prompt" name="prompt" rows="6" placeholder="Enter your prompt here..." required>
+
+                            Roleplay Scenario:
 
 You will take on the role of William, a 60-year-old man with stage IV colorectal cancer with liver metastases. Your liver function is deteriorating, and your prognosis is poor. You are under the care of a GP and a community care team.
     
@@ -92,26 +83,37 @@ Case Study Background:
 
 William's Background: William grew up in a large family in a regional area of Australia. He has witnessed significant advancements in healthcare and life expectancy, including improvements in immunization, antibiotics, medical technology, aged care facilities, and government support for life-limiting illnesses.
 Current Concerns: William is worried about recent changes in his bowel habits and has sought advice from his GP. Until now, he believed he would live to a "ripe old age" and hasn't contemplated dying before then.  
-    </textarea><br>
+    
+                        </textarea>
+                    </div>
+                </div>
 
-        <label for="imageUrl">Image URL:</label><br>
-        <input type="url" id="imageUrl" name="imageUrl" placeholder="Enter Image URL from Canvas"
-            title="Get this from Canvas --> Files --> Right-Click --> Copy Link Address" value="https://upload.wikimedia.org/wikipedia/commons/b/b9/WTF_Josh_Bluntschli_Aussie_bloke.jpg" required><br>
+                <div class="field">
+                    <label class="label" for="imageUrl">Image URL</label>
+                    <div class="control">
+                        <input class="input" type="url" id="imageUrl" name="imageUrl" placeholder="Enter Image URL from Canvas" value="https://upload.wikimedia.org/wikipedia/commons/b/b9/WTF_Josh_Bluntschli_Aussie_bloke.jpg" required>
+                    </div>
+                </div>
 
-        <label for="buttonLabel">Button Label:</label><br>
-        <input type="text" id="buttonLabel" name="buttonLabel" placeholder="Enter button label..." value="Start Roleplay" required><br>
+                <div class="field">
+                    <label class="label" for="buttonLabel">Button Label</label>
+                    <div class="control">
+                        <input class="input" type="text" id="buttonLabel" name="buttonLabel" placeholder="Enter button label..." value="Start Roleplay" required>
+                    </div>
+                </div>
 
-        <button type="button" onclick="generateLink()">Generate Link</button>
-    </form>
+            </form>
 
-    <h2>Preview</h2>
-    <div id="preview" class="preview" style="display:none;">
-        <!-- The generated button preview will be shown here -->
-    </div>
+            <div class="section">
+                <h2 class="title is-4">Preview</h2>
+                <div id="preview" class="preview" style="display:none;"></div>
 
-    <h2>Generated Link</h2>
-    <textarea id="result" readonly style="width: 100%; height: 100px;"></textarea><br>
-    <button onclick="copyToClipboard()">Copy to Clipboard</button>
+                <h2 class="title is-4">Generated Link</h2>
+                <textarea id="result" class="textarea" readonly style="height: 100px;"></textarea><br>
+                <button class="button is-info" onclick="copyToClipboard()">Copy to Clipboard</button>
+            </div>
+        </div>
+    </section>
 
     <script>
         function generateLink() {
@@ -137,6 +139,14 @@ Current Concerns: William is worried about recent changes in his bowel habits an
             document.execCommand('copy');
             alert('Link copied to clipboard!');
         }
+
+        // Event listeners to regenerate the preview when inputs change
+        document.getElementById('prompt').addEventListener('input', generateLink);
+        document.getElementById('imageUrl').addEventListener('input', generateLink);
+        document.getElementById('buttonLabel').addEventListener('input', generateLink);
+
+        // Automatically generate preview when page loads
+        window.onload = generateLink;
     </script>
 
 </body>
