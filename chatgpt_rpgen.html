@@ -57,7 +57,8 @@
                 <div class="field">
                     <label class="label" for="prompt">Prompt</label>
                     <div class="control">
-                        <textarea class="textarea" id="prompt" name="prompt" rows="6" placeholder="Enter your prompt here..." required>Roleplay Scenario:
+                        <textarea class="textarea" id="prompt" name="prompt" rows="6"
+                            placeholder="Enter your prompt here..." required>Roleplay Scenario:
 
 You will take on the role of William, a 60-year-old man with stage IV colorectal cancer with liver metastases. Your liver function is deteriorating, and your prognosis is poor. You are under the care of a GP and a community care team.
     
@@ -88,28 +89,32 @@ Current Concerns: William is worried about recent changes in his bowel habits an
                 <div class="field">
                     <label class="label" for="imageUrl">Image URL</label>
                     <div class="control">
-                        <input class="input" type="url" id="imageUrl" name="imageUrl" placeholder="Enter Image URL from Canvas" value="https://upload.wikimedia.org/wikipedia/commons/b/b9/WTF_Josh_Bluntschli_Aussie_bloke.jpg" required>
+                        <input class="input" type="url" id="imageUrl" name="imageUrl"
+                            placeholder="Enter Image URL from Canvas"
+                            value="https://upload.wikimedia.org/wikipedia/commons/b/b9/WTF_Josh_Bluntschli_Aussie_bloke.jpg"
+                            required>
                     </div>
                 </div>
 
                 <div class="field">
                     <label class="label" for="buttonLabel">Button Label</label>
                     <div class="control">
-                        <input class="input" type="text" id="buttonLabel" name="buttonLabel" placeholder="Enter button label..." value="Start Roleplay" required>
+                        <input class="input" type="text" id="buttonLabel" name="buttonLabel"
+                            placeholder="Enter button label..." value="Start Roleplay" required>
                     </div>
                 </div>
 
-          
 
-            <div class="field">
-                <h2 class="title is-4">Preview</h2>
-                <div id="preview" class="preview" style="display:none;"></div>
 
-                <h2 class="title is-4">Generated Link</h2>
-                <textarea id="result" class="textarea" readonly style="height: 100px;"></textarea><br>
-                <button class="button is-info" onclick="copyToClipboard()">Copy to Clipboard</button>
-            </div>
-        </form>
+                <div class="field">
+                    <h2 class="title is-4">Preview</h2>
+                    <div id="preview" class="preview" style="display:none;"></div>
+
+                    <h2 class="title is-4">Generated Link</h2>
+                    <textarea id="result" class="textarea" readonly style="height: 100px;"></textarea><br>
+                    <button class="button is-info" onclick="copyToClipboard()">Copy to Clipboard</button>
+                </div>
+            </form>
         </div>
     </section>
 
@@ -123,7 +128,7 @@ Current Concerns: William is worried about recent changes in his bowel habits an
 
             // Update the result textarea with the generated link
             const resultTextarea = document.getElementById('result');
-            resultTextarea.value = `<a href="${link}" style="text-decoration:none; display: inline-block; padding: 10px 20px; background-color: #005a9c; color: white; font-size: 16px; font-family: Arial, sans-serif; border-radius: 5px;" aria-label="Start roleplay">\n<img src="${imageUrl}" alt="Portrait" style="display: block; margin: 0 auto 10px; border-radius: 50%; width: 100px; height: 100px;">\n${buttonLabel}\n</a>`;
+            resultTextarea.value = `<a href="${link}" target="_blank" style="text-decoration:none; display: inline-block; padding: 10px 20px; background-color: #005a9c; color: white; font-size: 16px; font-family: Arial, sans-serif; border-radius: 5px;" aria-label="Start roleplay">\n<img src="${imageUrl}" alt="Portrait" style="display: block; margin: 0 auto 10px; border-radius: 50%; width: 100px; height: 100px;">\n${buttonLabel}\n</a>`;
 
             // Display the preview
             const previewDiv = document.getElementById('preview');
@@ -135,7 +140,7 @@ Current Concerns: William is worried about recent changes in his bowel habits an
             const resultTextarea = document.getElementById('result');
             resultTextarea.select();
             document.execCommand('copy');
-            alert('Link copied to clipboard!');
+            alert('Link copied to clipboard.');
         }
 
         // Event listeners to regenerate the preview when inputs change
