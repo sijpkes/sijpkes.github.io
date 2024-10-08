@@ -33,7 +33,7 @@
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     
-    <div class="container">
+    <div class="content">
         <h1 class="title">Chat Roleplay Helper</h1>
         <p>Drag this to your browser bookmarks bar:</p><br>
 
@@ -41,9 +41,9 @@
            href="javascript:void%20function(){function%20a(a,b=window.document){const%20c=a.toLowerCase();let%20d=b.querySelector(%22.whitespace-pre-wrap%22);return%20d%26%26d.textContent.toLowerCase().includes(c)%3Ffunction(a){for(;a;){const%20b=a.getAttribute(%22data-message-author-role%22);if(%22user%22===b)return%20a;a=a.parentElement}return%20null}(d):null}function%20b(a,b=window.document){function%20c(a){a.textContent%26%26a.textContent.toLowerCase().includes(d)%26%26(e=a);for(let%20b%20of%20a.children)c(b)}const%20d=a.toLowerCase();let%20e=null;return%20c(b),e}async%20function%20c(){let%20a=await%20e;console.log(%22Got%20result:%20%22,a),a.a%26%26(a.a.classList.add(%22highlight%22),a.a.classList.add(%22hidden%22)),a.b%26%26(a.b.click(),a.b.dispatchEvent(new%20Event(%22click%22))),window.document.body.classList.remove(%22hidden%22),setTimeout(c,500)}window.document.body.classList.add(%22hidden%22);let%20d;const%20e=new%20Promise(c=%3E{d=setInterval(()=%3E{let%20e=a(%22roleplay%20scenario:%22),f=b(%22stay%20logged%20out%22);c({a:e,b:f}),clearInterval(d)},1e3)});c()}();">Chat Roleplay Helper</a>
 
         <h3>What it does:</h3>
-        <p>When you are in ChatGPT using a roleplay prompt containing a 'Roleplay Scenario:' it will clean up the user interface by:</p>
+        <p>When you are using a roleplay prompt in ChatGPT containing the text 'Roleplay Scenario:' it will clean up the user interface by:</p>
         <ol>
-            <li>Removing the login pane if you are not logged in, so you don't need to create an account.</li>
+            <li>Removing the login pane, so you don't need to login or create an account.</li>
             <li>Roleplay prompts are really long and push the text down; this fixes that by hiding the first prompt on the page.</li>
         </ol>
         <b>This will not work unless you click it after entering ChatGPT via a Roleplay prompt similar to the ones <a href='chatgpt_rpgen.html'>you can make here</a>.</b>
