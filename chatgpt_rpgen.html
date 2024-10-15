@@ -104,8 +104,6 @@ Current Concerns: William is worried about recent changes in his bowel habits an
                     </div>
                 </div>
 
-
-
                 <div class="field">
                     <h2 class="title is-4">Preview</h2>
                     <div id="preview" class="preview" style="display:none;"></div>
@@ -115,10 +113,16 @@ Current Concerns: William is worried about recent changes in his bowel habits an
                     <button class="button is-info" onclick="copyToClipboard()">Copy to Clipboard</button>
                 </div>
             </form>
+
+            <p>Use the <a href="chat_roleplay_bookmark.html">Roleplay Helper bookmark</a> to allow users to remove the annoying ChatGPT login dialog and the wall of text.</a></p>
         </div>
     </section>
 
     <script>
+        const form = document.getElementById('linkForm')
+
+        form.addEventListener('submit', e => e.preventDefault())
+
         function generateLink() {
             const prompt = encodeURIComponent(document.getElementById('prompt').value);
             const imageUrl = document.getElementById('imageUrl').value;
