@@ -45,20 +45,14 @@
             <h1 class="title">Make a ChatGPT Roleplay Button</h1>
             <p class="subtitle">Follow the instructions below:</p>
             <div class="content">
-                <ol>
-                    <li>Write the prompt.</li>
-                    <li>Copy the address of the portrait image in Canvas Files and Paste it below.</li>
-                    <li>Optionally set the button label.</li>
-                    <li>Select Copy to Clipboard and paste it in the Embed tool in Canvas.</li>
-                </ol>
-            </div>
 
-            <form id="linkForm">
-                <div class="field">
-                    <label class="label" for="prompt">Prompt</label>
-                    <div class="control">
-                        <textarea class="textarea" id="prompt" name="prompt" rows="6"
-                            placeholder="Enter your prompt here..." required>Roleplay Scenario:
+
+                <form id="linkForm">
+                    <div class="field">
+                        <label class="label" for="prompt">1. Write the Prompt</label>
+                        <div class="control">
+                            <textarea class="textarea" id="prompt" name="prompt" rows="6"
+                                placeholder="Enter your prompt here..." required>Roleplay Scenario:
 
 You will take on the role of William, a 60-year-old man with stage IV colorectal cancer with liver metastases. Your liver function is deteriorating, and your prognosis is poor. You are under the care of a GP and a community care team.
     
@@ -83,38 +77,41 @@ William's Background: William grew up in a large family in a regional area of Au
 Current Concerns: William is worried about recent changes in his bowel habits and has sought advice from his GP. Until now, he believed he would live to a "ripe old age" and hasn't contemplated dying before then.  
     
                         </textarea>
+                        </div>
                     </div>
-                </div>
 
-                <div class="field">
-                    <label class="label" for="imageUrl">Image URL</label>
-                    <div class="control">
-                        <input class="input" type="url" id="imageUrl" name="imageUrl"
-                            placeholder="Enter Image URL from Canvas"
-                            value="https://upload.wikimedia.org/wikipedia/commons/b/b9/WTF_Josh_Bluntschli_Aussie_bloke.jpg"
-                            required>
+                    <div class="field">
+                        <label class="label" for="imageUrl">2. Paste the Image Address for the portrait/icon.
+                            Files and Paste it below.</label>
+                        <div class="control">
+                            <input class="input" type="url" id="imageUrl" name="imageUrl"
+                                placeholder="Enter Image URL from Canvas"
+                                value="https://upload.wikimedia.org/wikipedia/commons/b/b9/WTF_Josh_Bluntschli_Aussie_bloke.jpg"
+                                required>
+                        </div>
                     </div>
-                </div>
 
-                <div class="field">
-                    <label class="label" for="buttonLabel">Button Label</label>
-                    <div class="control">
-                        <input class="input" type="text" id="buttonLabel" name="buttonLabel"
-                            placeholder="Enter button label..." value="Start Roleplay" required>
+                    <div class="field">
+                        <label class="label" for="buttonLabel">3. Set the button label.</label>
+                        <div class="control">
+                            <input class="input" type="text" id="buttonLabel" name="buttonLabel"
+                                placeholder="Enter button label..." value="Start Roleplay" required>
+                        </div>
                     </div>
-                </div>
 
-                <div class="field">
-                    <h2 class="title is-4">Preview</h2>
-                    <div id="preview" class="preview" style="display:none;"></div>
-
-                    <h2 class="title is-4">Generated Link</h2>
-                    <textarea id="result" class="textarea" readonly style="height: 100px;"></textarea><br>
-                    <button class="button is-info" onclick="copyToClipboard()">Copy to Clipboard</button>
-                </div>
-            </form>
-
-            <p>Use the <a href="chat_roleplay_bookmark.html">Roleplay Helper bookmark</a> to allow users to remove the annoying ChatGPT login dialog and the wall of text.</a></p>
+                    <div class="field">
+                        <label class="label">4. Check out the preview.</label>
+                        <div id="preview" class="preview" style="display:none;"></div>
+                    </div>
+                    <div class="field">
+                        <label class="label">5. Embed this link into your LMS.</label>
+                        <textarea id="result" class="textarea" readonly style="height: 100px;"></textarea><br>
+                        <button class="button is-info" onclick="copyToClipboard()">Copy to Clipboard</button>
+                    </div>
+                </form>
+            </div>
+            <strong>Your done!</strong>
+            <p>Use the <a href="chat_roleplay_bookmark.html">Roleplay Helper bookmark</a> to allow users to remove the first prompt in ChatGPT.</a></p>
         </div>
     </section>
 
