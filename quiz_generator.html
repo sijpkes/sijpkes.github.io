@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -48,30 +49,59 @@
 </head>
 
 <body>
-    <h1>Quiz Generator</h1>
-    <label for="quiz-name">Quiz Name:</label>
-    <input type="text" id="quiz-name" placeholder="Enter quiz name">
+    <section class="section">
+        <div class="container">
+            <h1 class="title has-text-centered">Quiz Generator</h1>
 
-    <label for="quiz-data">
-        <p>Generate the quiz questions using this prompt in your GenAI tool:<br><br>
-            <code type="UTF-8" id="prompt">
-            Generate a list of 20 multiple choice questions with 3 options per question including feedback.
-            Draw on the knowledge provided in this document (attach document with the content students need to know)
-            Format the questions in this JSON format: [{"question": "...", "options": { "A": "...", "B": "..." }, "correctAnswer": "..."}, feedback: { "A": "...", "B": "..."}]
-        </code>
-            <br>
-            <button class=".btn" id="copy-btn">Copy prompt</button> <br><br>
-            Paste the generated JSON below.
-        </p>
-    </label>
+            <div class="field">
+                <label class="label" for="quiz-name">Quiz Name</label>
+                <div class="control">
+                    <input class="input" type="text" id="quiz-name" placeholder="Enter quiz name">
+                </div>
+            </div>
 
-    <textarea id="quiz-data"></textarea>
+            <div class="field">
+                <label class="label" for="quiz-data">Quiz Questions Prompt</label>
+                <div class="content">
+                    <p>
+                        Generate the quiz questions using this prompt in your GenAI tool:
+                        <br><br>
+                        <code class="has-background-light p-3 is-block">
+                            Generate a list of 20 multiple choice questions with 3 options per question including feedback.<br>
+                            Draw on the knowledge provided in this document (attach document with the content students need to know).<br>
+                            Format the questions in this JSON format: 
+                            [{"question": "...", "options": { "A": "...", "B": "..." }, "correctAnswer": "..."}, feedback: { "A": "...", "B": "..."}]
+                        </code>
+                        <br>
+                        <button class="button is-link" id="copy-btn">Copy prompt</button>
+                        <br><br>
+                        Paste the generated JSON below.
+                    </p>
+                </div>
+            </div>
 
-    <button id="generate-quiz">Generate Quiz</button>
-    <a id="download-link" download="quiz.html" href="#" style="display:none;">Download Quiz</a>
-    <label for="quiz_html">Preview</label>
-    <div id="quiz_html"></div>
-    <p></p>
+            <div class="field">
+                <label class="label" for="quiz-data">Generated JSON</label>
+                <div class="control">
+                    <textarea class="textarea" id="quiz-data" placeholder="Paste the generated JSON here"></textarea>
+                </div>
+            </div>
+
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-primary" id="generate-quiz">Generate Quiz</button>
+                </div>
+                <div class="control">
+                    <a class="button is-success is-hidden" id="download-link" download="quiz.html" href="#">Download Quiz</a>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label" for="quiz_html">Preview</label>
+                <div class="box" id="quiz_html"></div>
+            </div>
+        </div>
+    </section>
     <script>
         function clipboard_copy(copyText) {
             // Get the text field
