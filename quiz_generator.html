@@ -66,8 +66,7 @@
                     <p>
                         Generate the quiz questions using this prompt in your GenAI tool:
                         <br><br>
-<textarea readonly=1 class="has-background-light p-3 is-block" id="prompt">
-Generate a list of 20 multiple choice questions with 3 options per question including feedback.<br>
+<textarea readonly=1 class="has-background-light p-3 is-block" id="prompt">Generate a list of 20 multiple choice questions with 3 options per question including feedback.<br>
 Draw on the knowledge provided in this document (attach document with the content students need to know).<br>
 Format the questions in this JSON format: 
 [{"question": "...", "options": { "A": "...", "B": "..." }, "correctAnswer": "..."}, feedback: { "A": "...", "B": "..."}]
@@ -115,7 +114,7 @@ Format the questions in this JSON format:
             navigator.clipboard.writeText(copyText.value);
 
             // Alert the copied text
-            alert("Copied the text: " + copyText.value);
+            alert("Prompt copied");
         }
 
         const btn = document.getElementById("copy-btn")
