@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #download-link {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Quiz Generator</h1>
+    <label for="quiz-name">Quiz Name:</label>
+    <input type="text" id="quiz-name" placeholder="Enter quiz name">
+
+    <label for="quiz-data">
+        <p>Generate the quiz questions using this prompt in your GenAI tool:<br><br>
+            <code type="UTF-8" id="prompt">
+            Generate a list of 20 multiple choice questions with 3 options per question including feedback.
+            Draw on the knowledge provided in this document (attach document with the content students need to know)
+            Format the questions in this JSON format: [{"question": "...", "options": { "A": "...", "B": "..." }, "correctAnswer": "..."}, feedback: { "A": "...", "B": "..."}]
+        </code>
+            <br>
+            <button class=".btn" data-clipboard-action="copy" data-clipboard-target="#prompt">Copy prompt</button> <br><br>
+            Paste the generated JSON below.
+        </p>
+    </label>
+
+    <textarea id="quiz-data"></textarea>
+
+    <button id="generate-quiz">Generate Quiz</button>
+    <a id="download-link" download="quiz.html" href="#" style="display:none;">Download Quiz</a>
+    <label for="quiz_html">Preview</label>
+    <div id="quiz_html"></div>
+    <script src="https://cdnjs.webstatic.cn/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
+    <script>
+        var clipboard = new ClipboardJS('.btn');
+        clipboard.on('success', function (e) {
+            console.info('Action:', e.action);
+            console.info('Text:', e.text);
+            console.info('Trigger:', e.trigger);
+
+            e.clearSelection();
+        });
+
+        clipboard.on('error', function (e) {
+            console.error('Action:', e.action);
+            console.error('Trigger:', e.trigger);
+        });
+
+        const generateQuizBtn = document.getElementById('generate-quiz');
+        const quizDataInput = document.getElementById('quiz-data');
+        const quizNameInput = document.getElementById('quiz-name');
+        const downloadLink = document.getElementById('download-link');
+     
+
+        const styles = `body {
+                font-family: Arial, sans-serif;
+                padding: 20px;
+                background-color: #f9f9f9;
+            }
+            .quiz-container {
+                max-width: 600px;
+                margin: auto;
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            .question {
+                font-size: 18px;
+                font-weight: bold;
+            }
+            .options label {
+                display: block;
+                margin-bottom: 10px;
+                cursor: pointer;
+            }
+            .btn {
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: white;
+                cursor: pointer;
+                border: none;
+                border-radius: 5px;
+                margin-top: 15px;
+            }
+            .hidden {
+                display: none;
+            }`;
+
+        generateQuizBtn.addEventListener('click', () => {
+            const quizData = JSON.parse(quizDataInput.value); // Parsing the quiz data from JSON
+            const quizName = quizNameInput.value || "Quiz"; // Fetching the quiz name or using a default
+
+            const quizBody = `<body><div class="quiz-container" id="quiz-container"></div></body>`;
+            const quizHTML = `<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${quizName}</title><style>${styles}</style></head>${quizBody}</html>`;
+
+            const store_html = document.getElementById("quiz_html");
+            store_html.innerHTML = quizHTML;
+
+            // Create the script content as a string
+            const scriptContent = `
+        const quizData = ${JSON.stringify(quizData)};
+        let currentQuestionIndex = 0;
+        function loadQuestion() {
+            const questionData = quizData[currentQuestionIndex];
+            const quizContainer = document.getElementById('quiz-container');
+            let questionHTML = '<p class="question">' + questionData.question + '</p>';
+            questionHTML += '<div class="options">';
+            for (const option in questionData.options) {
+                questionHTML += \`<label><input type="radio" name="option" value="\${option}"> \${option}: \${questionData.options[option]}</label>\`;
+            }
+            questionHTML += '</div>';
+            questionHTML += '<div class="btn" id="check-btn">Check</div>';
+            quizContainer.innerHTML = questionHTML;
+            document.getElementById('check-btn').addEventListener('click', checkAnswer);
+        }
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="option"]:checked')?.value;
+            const questionData = quizData[currentQuestionIndex];
+            if (selectedOption) {
+                if (selectedOption === questionData.correctAnswer) {
+                    alert("Correct!");
+                } else {
+                    alert("Incorrect! The correct answer is " + questionData.correctAnswer);
+                }
+                currentQuestionIndex++;
+                if (currentQuestionIndex < quizData.length) {
+                    loadQuestion();
+                } else {
+                    document.getElementById('quiz-container').innerHTML = '<p>Quiz complete!</p>';
+                }
+            } else {
+                alert('Please select an option.');
+            }
+        }
+        loadQuestion();
+    `;
+
+            // Create a new script element and append it to the page
+            const scriptElement = document.createElement('script');
+            scriptElement.textContent = scriptContent;
+            document.body.appendChild(scriptElement);
+
+            // Create a Blob object from the HTML string
+            const blob = new Blob([quizHTML], { type: 'text/html' });
+
+            // Create a temporary URL for the Blob
+            const url = URL.createObjectURL(blob);
+
+            // Set the download link's href to the temporary URL
+            downloadLink.href = url;
+
+            // Display the download link
+            downloadLink.style.display = 'block';
+        });
+
+    </script>
+</body>
+
+</html>
