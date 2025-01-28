@@ -1,0 +1,282 @@
+[
+  {
+    "question": "What type of engine does the Lamborghini Aventador use?",
+    "options": {
+      "A": "V8 Twin-Turbo",
+      "B": "V12 Naturally Aspirated",
+      "C": "V6 Hybrid"
+    },
+    "correctAnswer": "B",
+    "feedback": {
+      "A": "Incorrect. The Aventador uses a V12 engine, not a V8.",
+      "B": "Correct! The Aventador is powered by a V12 naturally aspirated engine.",
+      "C": "Incorrect. The Aventador does not use a V6 hybrid engine."
+    }
+  },
+  {
+    "question": "What is the top speed of the Lamborghini Aventador?",
+    "options": {
+      "A": "320 km/h",
+      "B": "350 km/h",
+      "C": "380 km/h"
+    },
+    "correctAnswer": "B",
+    "feedback": {
+      "A": "Incorrect. The Aventador can reach a higher speed than 320 km/h.",
+      "B": "Correct! The Aventador has a top speed of 350 km/h.",
+      "C": "Incorrect. The Aventador's top speed is slightly lower than 380 km/h."
+    }
+  },
+  {
+    "question": "What is the horsepower of the Lamborghini Aventador's engine?",
+    "options": {
+      "A": "700 HP",
+      "B": "770 HP",
+      "C": "800 HP"
+    },
+    "correctAnswer": "B",
+    "feedback": {
+      "A": "Incorrect. The Aventador produces more than 700 HP.",
+      "B": "Correct! The Aventador's engine delivers 770 HP.",
+      "C": "Incorrect. The Aventador does not reach 800 HP."
+    }
+  },
+  {
+    "question": "What is the name of the Aventador's lightweight construction technology?",
+    "options": {
+      "A": "CarbonFrame",
+      "B": "Monocoque",
+      "C": "Carbon Fiber Monocoque"
+    },
+    "correctAnswer": "C",
+    "feedback": {
+      "A": "Incorrect. The correct term is Carbon Fiber Monocoque.",
+      "B": "Incorrect. While it is a monocoque, the specific term includes carbon fiber.",
+      "C": "Correct! The Aventador uses a Carbon Fiber Monocoque for lightweight construction."
+    }
+  },
+  {
+    "question": "What type of transmission does the Aventador use?",
+    "options": {
+      "A": "Manual",
+      "B": "Automatic",
+      "C": "ISR (Independent Shifting Rods)"
+    },
+    "correctAnswer": "C",
+    "feedback": {
+      "A": "Incorrect. The Aventador does not use a manual transmission.",
+      "B": "Incorrect. The Aventador uses a specialized transmission system, not a conventional automatic.",
+      "C": "Correct! The Aventador uses an ISR (Independent Shifting Rods) transmission."
+    }
+  },
+  {
+    "question": "What is the 0-100 km/h acceleration time of the Aventador?",
+    "options": {
+      "A": "2.8 seconds",
+      "B": "3.0 seconds",
+      "C": "3.5 seconds"
+    },
+    "correctAnswer": "A",
+    "feedback": {
+      "A": "Correct! The Aventador accelerates from 0-100 km/h in just 2.8 seconds.",
+      "B": "Incorrect. The Aventador is slightly faster than 3.0 seconds.",
+      "C": "Incorrect. The Aventador's acceleration time is much quicker than 3.5 seconds."
+    }
+  },
+  {
+    "question": "What is the name of the Aventador's signature scissor doors?",
+    "options": {
+      "A": "LamboDoors",
+      "B": "Vertical Doors",
+      "C": "Lamborghini Doors"
+    },
+    "correctAnswer": "C",
+    "feedback": {
+      "A": "Incorrect. The correct term is Lamborghini Doors.",
+      "B": "Incorrect. While they are vertical, the specific term is Lamborghini Doors.",
+      "C": "Correct! The Aventador features iconic Lamborghini Doors."
+    }
+  },
+  {
+    "question": "What is the primary material used in the Aventador's body construction?",
+    "options": {
+      "A": "Aluminum",
+      "B": "Steel",
+      "C": "Carbon Fiber"
+    },
+    "correctAnswer": "C",
+    "feedback": {
+      "A": "Incorrect. While aluminum is used, carbon fiber is the primary material.",
+      "B": "Incorrect. Steel is not the primary material used in the Aventador.",
+      "C": "Correct! Carbon Fiber is the primary material for the Aventador's body."
+    }
+  },
+  {
+    "question": "What is the name of the Aventador's aerodynamic system?",
+    "options": {
+      "A": "AeroDynamics+",
+      "B": "ALA (Aerodinamica Lamborghini Attiva)",
+      "C": "AirFlow System"
+    },
+    "correctAnswer": "B",
+    "feedback": {
+      "A": "Incorrect. The correct system is ALA.",
+      "B": "Correct! The Aventador uses the ALA (Aerodinamica Lamborghini Attiva) system.",
+      "C": "Incorrect. The Aventador's aerodynamic system is called ALA."
+    }
+  },
+  {
+    "question": "What is the displacement of the Aventador's engine?",
+    "options": {
+      "A": "5.2 liters",
+      "B": "6.5 liters",
+      "C": "7.0 liters"
+    },
+    "correctAnswer": "B",
+    "feedback": {
+      "A": "Incorrect. The Aventador's engine is larger than 5.2 liters.",
+      "B": "Correct! The Aventador's engine has a displacement of 6.5 liters.",
+      "C": "Incorrect. The Aventador's engine does not reach 7.0 liters."
+    }
+  },
+  {
+    "question": "What is the name of the Aventador's successor?",
+    "options": {
+      "A": "Huracán",
+      "B": "Revuelto",
+      "C": "Sian"
+    },
+    "correctAnswer": "B",
+    "feedback": {
+      "A": "Incorrect. The Huracán is a different model.",
+      "B": "Correct! The Aventador's successor is the Revuelto.",
+      "C": "Incorrect. The Sian is a limited-edition hybrid model."
+    }
+  },
+  {
+    "question": "What is the Aventador's fuel efficiency (combined) approximately?",
+    "options": {
+      "A": "10 L/100 km",
+      "B": "17 L/100 km",
+      "C": "22 L/100 km"
+    },
+    "correctAnswer": "C",
+    "feedback": {
+      "A": "Incorrect. The Aventador is less fuel-efficient than 10 L/100 km.",
+      "B": "Incorrect. The Aventador's fuel consumption is higher than 17 L/100 km.",
+      "C": "Correct! The Aventador has a combined fuel efficiency of approximately 22 L/100 km."
+    }
+  },
+  {
+    "question": "What is the name of the Aventador's infotainment system?",
+    "options": {
+      "A": "Lamborghini Connect",
+      "B": "Lamborghini Infotainment",
+      "C": "Lamborghini Telematics"
+    },
+    "correctAnswer": "A",
+    "feedback": {
+      "A": "Correct! The Aventador uses the Lamborghini Connect system.",
+      "B": "Incorrect. The correct name is Lamborghini Connect.",
+      "C": "Incorrect. The system is called Lamborghini Connect."
+    }
+  },
+  {
+    "question": "What is the Aventador's torque output?",
+    "options": {
+      "A": "600 Nm",
+      "B": "690 Nm",
+      "C": "720 Nm"
+    },
+    "correctAnswer": "C",
+    "feedback": {
+      "A": "Incorrect. The Aventador produces more torque than 600 Nm.",
+      "B": "Incorrect. The Aventador's torque is slightly higher than 690 Nm.",
+      "C": "Correct! The Aventador delivers 720 Nm of torque."
+    }
+  },
+  {
+    "question": "What is the Aventador's weight distribution?",
+    "options": {
+      "A": "40:60 (Front:Rear)",
+      "B": "43:57 (Front:Rear)",
+      "C": "50:50 (Front:Rear)"
+    },
+    "correctAnswer": "B",
+    "feedback": {
+      "A": "Incorrect. The Aventador's weight distribution is slightly more balanced.",
+      "B": "Correct! The Aventador has a 43:57 weight distribution.",
+      "C": "Incorrect. The Aventador's weight distribution is not perfectly balanced."
+    }
+  },
+  {
+    "question": "What is the name of the Aventador's special edition model?",
+    "options": {
+      "A": "Aventador SVJ",
+      "B": "Aventador LP 780-4 Ultimae",
+      "C": "Aventador SuperVeloce"
+    },
+    "correctAnswer": "B",
+    "feedback": {
+      "A": "Incorrect. The SVJ is a performance variant, not the final edition.",
+      "B": "Correct! The Aventador LP 780-4 Ultimae is the special edition model.",
+      "C": "Incorrect. The SuperVeloce is a different variant."
+    }
+  },
+  {
+    "question": "What is the Aventador's braking system made of?",
+    "options": {
+      "A": "Steel",
+      "B": "Carbon Ceramic",
+      "C": "Aluminum"
+    },
+    "correctAnswer": "B",
+    "feedback": {
+      "A": "Incorrect. The Aventador uses a more advanced braking material.",
+      "B": "Correct! The Aventador features Carbon Ceramic brakes.",
+      "C": "Incorrect. Aluminum is not used for the braking system."
+    }
+  },
+  {
+    "question": "What is the Aventador's wheelbase length?",
+    "options": {
+      "A": "2500 mm",
+      "B": "2700 mm",
+      "C": "2900 mm"
+    },
+    "correctAnswer": "B",
+    "feedback": {
+      "A": "Incorrect. The Aventador's wheelbase is longer than 2500 mm.",
+      "B": "Correct! The Aventador has a wheelbase of 2700 mm.",
+      "C": "Incorrect. The Aventador's wheelbase is shorter than 2900 mm."
+    }
+  },
+  {
+    "question": "What is the Aventador's exhaust system made of?",
+    "options": {
+      "A": "Stainless Steel",
+      "B": "Titanium",
+      "C": "Aluminum"
+    },
+    "correctAnswer": "A",
+    "feedback": {
+      "A": "Correct! The Aventador's exhaust system is made of stainless steel.",
+      "B": "Incorrect. Titanium is not used for the exhaust system.",
+      "C": "Incorrect. Aluminum is not used for the exhaust system."
+    }
+  },
+  {
+    "question": "What is the Aventador's production period?",
+    "options": {
+      "A": "2010-2022",
+      "B": "2011-2021",
+      "C": "2012-2023"
+    },
+    "correctAnswer": "B",
+    "feedback": {
+      "A": "Incorrect. The Aventador was produced from 2011 to 2021.",
+      "B": "Correct! The Aventador was produced from 2011 to 2021.",
+      "C": "Incorrect. The production period ended in 2021, not 2023."
+    }
+  }
+]
