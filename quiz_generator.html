@@ -339,7 +339,7 @@ Format the questions in this JSON format:
             feedbackElement.classList.add('hidden');
             document.getElementById('question-container').classList.add('hidden');
             document.getElementById('next-btn').classList.add('hidden');
-            document.getElementsByClassName[0]('question-count').classList.add('hidden');
+            document.getElementById('counter').classList.add('hidden');
         }
 
         // Retry the quiz
@@ -348,6 +348,7 @@ Format the questions in this JSON format:
             correctCount = 0;
             loadQuestion();
             document.getElementById('question-container').classList.remove('hidden');
+            document.getElementById('counter').classList.remove('hidden');
             document.getElementById('result-container').classList.add('hidden');
         });
 
@@ -433,7 +434,7 @@ Format the questions in this JSON format:
         <div id="feedback" class="feedback hidden"></div>
         <div class="btn" id="check-btn">Check</div>
         <div class="btn hidden" id="next-btn">Next</div>
-        <div class="question-count">
+        <div id="counter" class="question-count">
            Question: <span id="q_n">1</span> of <span id="q_t">~</span>
         </div>
         <div id="result-container" class="result-container hidden">
