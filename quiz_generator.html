@@ -139,47 +139,84 @@ Format the questions in this JSON format:
         loadQuestion();
     </textarea>
     <textarea id="text_styles" style="display: none">
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-        .quiz-container {
-            max-width: 600px;
-            margin: auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
         .question {
             font-size: 18px;
             font-weight: bold;
         }
+
         .options label {
             display: block;
             margin-bottom: 10px;
             cursor: pointer;
         }
-        .btn {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
+
+        .feedback {
+            font-size: 14px;
             margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
         }
+
+        .feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
         .hidden {
             display: none;
+        }
+
+        .result-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .result {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .retry-btn {
+            background-color: #28a745;
+            color: #fff;
+            margin-top: 20px;
+        }
+
+        .retry-btn:hover {
+            background-color: #218838;
+        }
+
+        .question-count {
+            display: block;
+            float: right;
+            width: 7em;
+            margin-top: 2em;
         }
     </textarea>
     <textarea id="script_content" style="display: none;">
         const body = document.getElementsByTagName("body")[0]
         const quizData = JSON.parse(body.dataset.questions)
-        console.dir(quizData)
-
-
+       // console.dir(quizData)
 
         function shuffleQuestions(options) {
             //const entries = Object.entries(options);
@@ -392,7 +429,7 @@ Format the questions in this JSON format:
         <div class="btn" id="check-btn">Check</div>
         <div class="btn hidden" id="next-btn">Next</div>
         <div class="question-count">
-            <div id="q_n">1</div> / <div id="q_t">~</div>
+           Question: <span id="q_n">1</span> of <span id="q_t">~</span>
         </div>
         <div id="result-container" class="result-container hidden">
             <p class="result" id="final-result"></p>
