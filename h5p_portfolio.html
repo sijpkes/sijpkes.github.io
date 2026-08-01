@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Modern HTML5 boilerplate for a portfolio project.">
+    <title>H5P Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Replace @latest with a specific version, e.g., @3.9.0, for production -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/h5p-standalone@latest/dist/styles/h5p.css">
+    <script src="https://cdn.jsdelivr.net/npm/h5p-standalone@latest/dist/main.bundle.js" charset="UTF-8"></script>
+</head>
+
+<body>
+    <header>
+        <h1>H5P Portfolio</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Welcome</h2>
+            <p>This is a modern HTML5 boilerplate for your portfolio project.</p>
+        </section>
+        <div id="h5p-container"></div>
+
+        <script src="https://cdn.jsdelivr.net/npm/h5p-standalone@latest/dist/main.bundle.js"></script>
+
+
+    </main>
+    <footer>
+        <p>&copy; 2026 Paul Sijpkes</p>
+    </footer>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const options = {
+                h5pJsonPath: '/h5p', // Path to your self-hosted H5P content directory
+                frameJs: 'https://cdn.jsdelivr.net/npm/h5p-standalone@latest/dist/frame.bundle.js',
+                frameCss: 'https://cdn.jsdelivr.net/npm/h5p-standalone@latest/dist/styles/h5p.css',
+            };
+
+            const el = document.getElementById('h5p-container');
+
+            // H5PStandalone is globally available when main.bundle.js is included via a script tag
+            new H5PStandalone.H5P(el, options);
+
+        });
+    </script>
+</body>
+
+</html>
