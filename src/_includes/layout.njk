@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if title %}{{ title }} | {% endif %}Paul Sijpkes</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <style>
+      body { padding: 20px; }
+      .page-shell { max-width: 1100px; margin: 0 auto; }
+      nav { margin-bottom: 1.5rem; }
+      .content a { color: #3273dc; }
+      .content a:hover { text-decoration: underline; }
+    </style>
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+    <div class="page-shell">
+      <nav class="navbar is-light is-rounded" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item has-text-weight-semibold" href="/index.html">Paul Sijpkes</a>
+        </div>
+        <div class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" href="/index.html">Home</a>
+            <a class="navbar-item" href="/quiz_generator.html">Quiz Generator</a>
+            <a class="navbar-item" href="/h5p_portfolio.html">Portfolio</a>
+            <a class="navbar-item" href="/generic_cards2.html">Cards</a>
+          <!--  <a class="navbar-item" href="/chatgpt_rpgen.html">Roleplay Maker</a>
+            <a class="navbar-item" href="/chat_roleplay_bookmarklet.html">Bookmarklet</a> -->
+          </div>
+        </div>
+      </nav>
+
+      {% block content %}
+        {{ content | safe }}
+      {% endblock %}
+    </div>
+  </body>
+</html>

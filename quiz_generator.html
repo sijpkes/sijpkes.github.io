@@ -1,475 +1,337 @@
-<!DOCTYPE html>
-<html lang="en">
+---
+layout: layout.njk
+title: Quiz Generator
+permalink: /quiz_generator.html
+---
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Generator</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
+<section class="section">
+  <div class="container">
+    <h1 class="title has-text-centered">Quiz Generator</h1>
 
-        textarea {
-            width: 100%;
-            height: 200px;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            resize: vertical;
-        }
+    <div class="field">
+      <label class="label" for="quiz-name">Quiz Name</label>
+      <div class="control">
+        <input class="input" type="text" id="quiz-name" placeholder="Enter quiz name">
+      </div>
+    </div>
 
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        #download-link {
-            display: block;
-            margin-top: 10px;
-        }
-        .quiz_preview {
-            width: 100%;
-            height: 300px;
-        }
-    </style>
-</head>
-
-<body>
-    <section class="section">
-        <div class="container">
-            <h1 class="title has-text-centered">Quiz Generator</h1>
-
-            <div class="field">
-                <label class="label" for="quiz-name">Quiz Name</label>
-                <div class="control">
-                    <input class="input" type="text" id="quiz-name" placeholder="Enter quiz name">
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label" for="quiz-data">Quiz Questions Prompt</label>
-                <div class="content">
-                    <p>
-                        Generate the quiz questions using this prompt in your GenAI tool:
-                        <br><br>
-                        <textarea rows="4" readonly=1 class="has-background-light p-3 is-block" id="prompt">Generate a list of 20 multiple choice questions with 3 options per question including feedback.
+    <div class="field">
+      <label class="label" for="quiz-data">Quiz Questions Prompt</label>
+      <div class="content">
+        <p>
+          Generate the quiz questions using this prompt in your GenAI tool:
+          <br><br>
+          <textarea rows="4" readonly="1" class="has-background-light p-3 is-block" id="prompt">Generate a list of 20 multiple choice questions with 3 options per question including feedback.
 Draw on the knowledge provided in this document (attach document with the content students need to know).
-Format the questions in this JSON format: 
+Format the questions in this JSON format:
 [{"question": "...", "options": { "A": "...", "B": "..." }, "correctAnswer": "..."}, feedback: { "A": "...", "B": "..."}]
 </textarea>
-                        <br>
-                        <button class="button is-link" id="copy-btn">Copy prompt</button>
-                        <br><br>
-                        Paste the generated JSON below.
-                    </p>
-                </div>
-            </div>
+          <br>
+          <button class="button is-link" id="copy-btn">Copy prompt</button>
+          <br><br>
+          Paste the generated JSON below.
+        </p>
+      </div>
+    </div>
 
-            <div class="field">
-                <label class="label" for="quiz-data">Generated JSON</label>
-                <div class="control">
-                    <textarea class="textarea" id="quiz-data" placeholder="Paste the generated JSON here"></textarea>
-                </div>
-            </div>
+    <div class="field">
+      <label class="label" for="quiz-data">Generated JSON</label>
+      <div class="control">
+        <textarea class="textarea" id="quiz-data" placeholder="Paste the generated JSON here"></textarea>
+      </div>
+    </div>
 
-            <div class="field is-grouped">
-                <div class="control">
-                    <a class="button is-success is-hidden" id="download-link" download="quiz.html" href="#">Download
-                        Quiz</a>
-                </div>
-                <div class="control">
-                    <button class="button is-primary" id="generate-quiz">Generate Quiz</button>
-                </div>
-            </div>
+    <div class="field is-grouped">
+      <div class="control">
+        <a class="button is-success is-hidden" id="download-link" download="quiz.html" href="#">Download Quiz</a>
+      </div>
+      <div class="control">
+        <button class="button is-primary" id="generate-quiz">Generate Quiz</button>
+      </div>
+    </div>
 
-            <div class="field">
-                <label class="label" for="quiz_html">Preview</label>
-                <iframe class="box quiz_preview" id="quiz_html"></iframe>
-            </div>
-        </div>
-    </section>
-    <textarea id="quiz_code" style="display:none">
-        let currentQuestionIndex = 0;
-        function loadQuestion() {
-            const questionData = quizData[currentQuestionIndex];
-            const quizContainer = document.getElementById('quiz-container');
-            let questionHTML = '<p class="question">' + questionData.question + '</p>';
-            questionHTML += '<div class="options">';
-            for (const option in questionData.options) {
-                questionHTML += `<label><input type="radio" name="option" value="${option}"> ${option}: ${questionData.options[option]}</label>`;
-            }
-            questionHTML += '</div>';
-            questionHTML += '<div class="btn" id="check-btn">Check</div>';
-            quizContainer.innerHTML = questionHTML;
-            document.getElementById('check-btn').addEventListener('click', checkAnswer);
-        }
-        function checkAnswer() {
-            const selectedOption = document.querySelector('input[name="option"]:checked')?.value;
-            const questionData = quizData[currentQuestionIndex];
-            if (selectedOption) {
-                if (selectedOption === questionData.correctAnswer) {
-                    alert("Correct!");
-                } else {
-                    alert("Incorrect! The correct answer is " + questionData.correctAnswer);
-                }
-                currentQuestionIndex++;
-                if (currentQuestionIndex < quizData.length) {
-                    loadQuestion();
-                } else {
-                    document.getElementById('quiz-container').innerHTML = '<p>Quiz complete!</p>';
-                }
-            } else {
-                alert('Please select an option.');
-            }
-        }
+    <div class="field">
+      <label class="label" for="quiz_html">Preview</label>
+      <iframe class="box quiz_preview" id="quiz_html"></iframe>
+    </div>
+  </div>
+</section>
+
+<textarea id="quiz_code" style="display:none">
+  let currentQuestionIndex = 0;
+  function loadQuestion() {
+    const questionData = quizData[currentQuestionIndex];
+    const quizContainer = document.getElementById('quiz-container');
+    let questionHTML = '<p class="question">' + questionData.question + '</p>';
+    questionHTML += '<div class="options">';
+    for (const option in questionData.options) {
+      questionHTML += `<label><input type="radio" name="option" value="${option}"> ${option}: ${questionData.options[option]}</label>`;
+    }
+    questionHTML += '</div>';
+    questionHTML += '<div class="btn" id="check-btn">Check</div>';
+    quizContainer.innerHTML = questionHTML;
+    document.getElementById('check-btn').addEventListener('click', checkAnswer);
+  }
+  function checkAnswer() {
+    const selectedOption = document.querySelector('input[name="option"]:checked')?.value;
+    const questionData = quizData[currentQuestionIndex];
+    if (selectedOption) {
+      if (selectedOption === questionData.correctAnswer) {
+        alert("Correct!");
+      } else {
+        alert("Incorrect! The correct answer is " + questionData.correctAnswer);
+      }
+      currentQuestionIndex++;
+      if (currentQuestionIndex < quizData.length) {
         loadQuestion();
-    </textarea>
-    <textarea id="text_styles" style="display: none">
-        .question {
-            font-size: 18px;
-            font-weight: bold;
-        }
+      } else {
+        document.getElementById('quiz-container').innerHTML = '<p>Quiz complete!</p>';
+      }
+    } else {
+      alert('Please select an option.');
+    }
+  }
+  loadQuestion();
+</textarea>
 
-        .options label {
-            display: block;
-            margin-bottom: 10px;
-            cursor: pointer;
-        }
+<textarea id="text_styles" style="display: none">
+  .question { font-size: 18px; font-weight: bold; }
+  .options label { display: block; margin-bottom: 10px; cursor: pointer; }
+  .feedback { font-size: 14px; margin-top: 15px; padding: 10px; border-radius: 5px; }
+  .feedback.correct { background-color: #d4edda; color: #155724; }
+  .feedback.incorrect { background-color: #f8d7da; color: #721c24; }
+  .btn { display: inline-block; padding: 10px 15px; background-color: #007bff; color: #fff; border-radius: 5px; cursor: pointer; text-align: center; margin-top: 20px; }
+  .btn:hover { background-color: #0056b3; }
+  .hidden { display: none; }
+  .result-container { text-align: center; margin-top: 20px; }
+  .result { font-size: 24px; font-weight: bold; }
+  .retry-btn { background-color: #28a745; color: #fff; margin-top: 20px; }
+  .retry-btn:hover { background-color: #218838; }
+  .question-count { float: right; width: 7em; margin-top: 2em; }
+</textarea>
 
-        .feedback {
-            font-size: 14px;
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 5px;
-        }
+<textarea id="script_content" style="display: none;">
+  const body = document.getElementsByTagName("body")[0];
+  const quizData = JSON.parse(body.dataset.questions);
 
-        .feedback.correct {
-            background-color: #d4edda;
-            color: #155724;
-        }
+  function shuffleQuestions(options) {
+    for (let i = options.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [options[i], options[j]] = [options[j], options[i]];
+    }
+    return options;
+  }
 
-        .feedback.incorrect {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
+  quizData.questions = shuffleQuestions(quizData);
+  let currentQuestionIndex = 0;
+  let selectedOption = null;
+  let correctCount = 0;
 
-        .btn {
-            display: inline-block;
-            padding: 10px 15px;
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 5px;
-            cursor: pointer;
-            text-align: center;
-            margin-top: 20px;
-        }
+  function loadQuestion() {
+    const questionData = quizData.questions[currentQuestionIndex];
+    const questionContainer = document.getElementById('question-container');
+    const options = questionContainer.querySelectorAll("input[type='radio']");
+    const q_n = document.getElementById("q_n");
+    const q_t = document.getElementById("q_t");
+    q_n.textContent = currentQuestionIndex + 1;
+    q_t.textContent = quizData.questions.length;
 
-        .btn:hover {
-            background-color: #0056b3;
-        }
+    for (let i = 0; i < options.length; i++) {
+      options[i].setAttribute("disabled", null);
+    }
 
-        .hidden {
-            display: none;
-        }
+    const shuffledOptions = shuffleOptions(questionData.options);
+    questionContainer.innerHTML = `
+      <p class="question">${questionData.question}</p>
+      <div class="options">
+        ${Object.keys(shuffledOptions).map(key => `
+          <label>
+            <input type="radio" name="option" value="${key}">
+            <span>${shuffledOptions[key]}</span>
+          </label>`).join('')}
+      </div>
+    `;
 
-        .result-container {
-            text-align: center;
-            margin-top: 20px;
-        }
+    document.getElementById('feedback').classList.add('hidden');
+    document.getElementById('check-btn').classList.remove('hidden');
+    document.getElementById('next-btn').classList.add('hidden');
+    selectedOption = null;
+  }
 
-        .result {
-            font-size: 24px;
-            font-weight: bold;
-        }
+  function showFeedback() {
+    const questionData = quizData.questions[currentQuestionIndex];
+    const feedbackElement = document.getElementById('feedback');
+    const options = document.querySelectorAll("input[type='radio']");
+    for (let i = 0; i < options.length; i++) {
+      options[i].setAttribute("disabled", "1");
+    }
 
-        .retry-btn {
-            background-color: #28a745;
-            color: #fff;
-            margin-top: 20px;
-        }
+    if (selectedOption === questionData.correctAnswer) {
+      feedbackElement.textContent = questionData.feedback[selectedOption];
+      feedbackElement.classList.add('correct');
+      feedbackElement.classList.remove('incorrect');
+      correctCount++;
+    } else {
+      feedbackElement.textContent = questionData.feedback[selectedOption] || "Please select an option.";
+      feedbackElement.classList.add('incorrect');
+      feedbackElement.classList.remove('correct');
+    }
+    feedbackElement.classList.remove('hidden');
+  }
 
-        .retry-btn:hover {
-            background-color: #218838;
-        }
+  function shuffleOptions(options) {
+    const entries = Object.entries(options);
+    for (let i = entries.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [entries[i], entries[j]] = [entries[j], entries[i]];
+    }
+    return Object.fromEntries(entries);
+  }
 
-        .question-count {
-            float: right;
-            width: 7em;
-            margin-top: 2em;
-        }
-    </textarea>
-    <textarea id="script_content" style="display: none;">
-        const body = document.getElementsByTagName("body")[0]
-        const quizData = JSON.parse(body.dataset.questions)
-       // console.dir(quizData)
+  document.getElementById('check-btn').addEventListener('click', function () {
+    selectedOption = document.querySelector('input[name="option"]:checked')?.value;
+    if (selectedOption) {
+      showFeedback();
+      document.getElementById('check-btn').classList.add('hidden');
+      document.getElementById('next-btn').classList.remove('hidden');
+    } else {
+      alert('Please select an answer.');
+    }
+  });
 
-        function shuffleQuestions(options) {
-            //const entries = Object.entries(options);
-            for (let i = options.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [options[i], options[j]] = [options[j], options[i]];
-            }
-            return options
-        }
-        
-        quizData.questions = shuffleQuestions(quizData)
+  document.getElementById('next-btn').addEventListener('click', function () {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < quizData.questions.length) {
+      loadQuestion();
+    } else {
+      showFinalResult();
+    }
+  });
 
-        let currentQuestionIndex = 0;
-        let selectedOption = null;
-        let correctCount = 0;
+  function showFinalResult() {
+    const resultContainer = document.getElementById('result-container');
+    const finalResult = document.getElementById('final-result');
+    const percentage = Math.round((correctCount / quizData.questions.length) * 100);
+    const feedbackElement = document.getElementById('feedback');
+    finalResult.textContent = `You scored ${percentage}% correct answers!`;
+    resultContainer.classList.remove('hidden');
+    feedbackElement.classList.add('hidden');
+    document.getElementById('question-container').classList.add('hidden');
+    document.getElementById('next-btn').classList.add('hidden');
+    document.getElementById('counter').classList.add('hidden');
+  }
 
-        // Load a question
-        function loadQuestion() {
-            const questionData = quizData.questions[currentQuestionIndex];
-            const questionContainer = document.getElementById('question-container');
-            const options = questionContainer.querySelectorAll("input[type='radio']")
-            const q_n = document.getElementById("q_n")
-            const q_t = document.getElementById("q_t")
-            q_n.textContent = currentQuestionIndex + 1
-            q_t.textContent = quizData.questions.length
+  document.getElementById('retry-btn').addEventListener('click', function () {
+    currentQuestionIndex = 0;
+    correctCount = 0;
+    loadQuestion();
+    document.getElementById('question-container').classList.remove('hidden');
+    document.getElementById('counter').classList.remove('hidden');
+    document.getElementById('result-container').classList.add('hidden');
+  });
 
-            for (let i = 0; i < options.length; i++) {
-                options[i].setAttribute("disabled", null)
-            }
+  loadQuestion();
+</textarea>
 
-            // Shuffle options
-            const shuffledOptions = shuffleOptions(questionData.options);
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  textarea { width: 100%; height: 200px; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; resize: vertical; }
+  input[type="text"] { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; }
+  button { padding: 10px 20px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+  button:hover { background-color: #0056b3; }
+  #download-link { display: block; margin-top: 10px; }
+  .quiz_preview { width: 100%; height: 300px; }
+</style>
 
-            // Build HTML for question and options
-            questionContainer.innerHTML = `
-                <p class="question">${questionData.question}</p>
-                <div class="options">
-                    ${Object.keys(shuffledOptions).map(key => `
-                        <label>
-                            <input type="radio" name="option" value="${key}">
-                            <span>${shuffledOptions[key]}</span>
-                        </label>`).join('')}
-                </div>
-            `;
+<script>
+  function escapeHTML(str) {
+    return str.replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
 
-            document.getElementById('feedback').classList.add('hidden');
-            document.getElementById('check-btn').classList.remove('hidden');
-            document.getElementById('next-btn').classList.add('hidden');
-            selectedOption = null;
-        }
+  function escapeCSS(str) {
+    return str.replace(/\\/g, '\\\\')
+      .replace(/'/g, "\\'")
+      .replace(/"/g, '\\"')
+      .replace(/</g, '\\3C ')
+      .replace(/>/g, '\\3E ')
+      .replace(/&/g, '\\26 ')
+      .replace(/\//g, '\\2F ');
+  }
 
-        // Show feedback after checking the answer
-        function showFeedback() {
-            const questionData = quizData.questions[currentQuestionIndex];
-            const feedbackElement = document.getElementById('feedback');
-            const options = document.querySelectorAll("input[type='radio']")
-            for (let i = 0; i < options.length; i++) {
-                options[i].setAttribute("disabled", "1")
-            }
+  function clipboard_copy(copyText) {
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(copyText.value);
+    alert("Prompt copied");
+    copyText.setSelectionRange(0, 0);
+  }
 
-            if (selectedOption === questionData.correctAnswer) {
-                feedbackElement.textContent = questionData.feedback[selectedOption];
-                feedbackElement.classList.add('correct');
-                feedbackElement.classList.remove('incorrect');
-                correctCount++; // Increment correct answer count
-            } else {
-                feedbackElement.textContent = questionData.feedback[selectedOption] || "Please select an option.";
-                feedbackElement.classList.add('incorrect');
-                feedbackElement.classList.remove('correct');
-            }
-            feedbackElement.classList.remove('hidden');
-        }
+  const btn = document.getElementById("copy-btn");
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const element = document.getElementById("prompt");
+    clipboard_copy(element);
+  });
 
-        // Shuffle the options to randomize their order
-        function shuffleOptions(options) {
-            const entries = Object.entries(options);
-            for (let i = entries.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [entries[i], entries[j]] = [entries[j], entries[i]];
-            }
-            return Object.fromEntries(entries);
-        }
+  const generateQuizBtn = document.getElementById('generate-quiz');
+  const quizDataInput = document.getElementById('quiz-data');
+  const quizNameInput = document.getElementById('quiz-name');
+  const styles = document.getElementById('text_styles').textContent;
 
-        // When the Check button is clicked
-        document.getElementById('check-btn').addEventListener('click', function () {
-            selectedOption = document.querySelector('input[name="option"]:checked')?.value;
-            if (selectedOption) {
-                showFeedback();
-                document.getElementById('check-btn').classList.add('hidden');
-                document.getElementById('next-btn').classList.remove('hidden');
-            } else {
-                alert('Please select an answer.');
-            }
-        });
+  generateQuizBtn.addEventListener('click', (e) => {
+    e.preventDefault();
 
-        // When the Next button is clicked
-        document.getElementById('next-btn').addEventListener('click', function () {
-            currentQuestionIndex++;
-            if (currentQuestionIndex < quizData.questions.length) {
-                loadQuestion();
-            } else {
-                showFinalResult();
-            }
-        });
+    let quizData;
+    try {
+      quizData = JSON.parse(quizDataInput.value);
+      console.dir(quizData);
+    } catch (e) {
+      console.error(e);
+      alert("Please use the prompt in the box to generate the quiz questions.");
+      return false;
+    }
 
-        // Show the final result with animation
-        function showFinalResult() {
-            const resultContainer = document.getElementById('result-container');
-            const finalResult = document.getElementById('final-result');
-            const percentage = Math.round((correctCount / quizData.questions.length) * 100);
-            const feedbackElement = document.getElementById('feedback');
-            finalResult.textContent = `You scored ${percentage}% correct answers!`;
+    const quizName = quizNameInput.value || "Quiz";
+    const quiz_document = document.getElementById("quiz_html").contentWindow.document;
+    const styleEl = quiz_document.createElement("style");
+    styleEl.textContent = styles;
 
-            // Display animation
-            resultContainer.classList.remove('hidden');
-            feedbackElement.classList.add('hidden');
-            document.getElementById('question-container').classList.add('hidden');
-            document.getElementById('next-btn').classList.add('hidden');
-            document.getElementById('counter').classList.add('hidden');
-        }
+    const conDiv = quiz_document.createElement("div");
+    conDiv.classList.add('quiz-container');
+    conDiv.id = "quiz-container";
+    conDiv.innerHTML = `<div id="question-container"></div>
+      <div id="feedback" class="feedback hidden"></div>
+      <div class="btn" id="check-btn">Check</div>
+      <div class="btn hidden" id="next-btn">Next</div>
+      <div id="counter" class="question-count">
+        Question: <span id="q_n">1</span> of <span id="q_t">~</span>
+      </div>
+      <div id="result-container" class="result-container hidden">
+        <p class="result" id="final-result"></p>
+        <div class="btn retry-btn" id="retry-btn">Retry</div>
+      </div>`;
 
-        // Retry the quiz
-        document.getElementById('retry-btn').addEventListener('click', function () {
-            currentQuestionIndex = 0;
-            correctCount = 0;
-            loadQuestion();
-            document.getElementById('question-container').classList.remove('hidden');
-            document.getElementById('counter').classList.remove('hidden');
-            document.getElementById('result-container').classList.add('hidden');
-        });
+    const quiz_body = quiz_document.getElementsByTagName("body")[0];
+    quiz_body.dataset.questions = JSON.stringify(quizData);
 
-        // Load the first question when the page is loaded
-        loadQuestion();
-    </textarea>
+    const scriptContent = document.getElementById("script_content").textContent;
+    const scriptElement = quiz_document.createElement('script');
+    scriptElement.textContent = scriptContent.trim();
 
-    <script>
-        function escapeHTML(str) {
-            return str.replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#039;');
-        }
+    quiz_body.appendChild(styleEl);
+    quiz_body.appendChild(conDiv);
+    quiz_body.appendChild(scriptElement);
 
-        function escapeCSS(str) {
-            return str.replace(/\\/g, '\\\\') // Escape backslashes
-                .replace(/'/g, "\\'")  // Escape single quotes
-                .replace(/"/g, '\\"')  // Escape double quotes
-                .replace(/</g, '\\3C ') // Escape < (less-than sign)
-                .replace(/>/g, '\\3E ') // Escape > (greater-than sign)
-                .replace(/&/g, '\\26 ') // Escape & (ampersand)
-                .replace(/\//g, '\\2F '); // Escape / (forward slash)
-        }
-
-        function clipboard_copy(copyText) {
-            // Select the text field
-            copyText.select();
-            copyText.setSelectionRange(0, 99999); // For mobile devices
-
-            // Copy the text inside the text field
-            navigator.clipboard.writeText(copyText.value);
-
-            // Alert the copied text
-            alert("Prompt copied");
-
-            copyText.setSelectionRange(0, 0)
-        }
-
-        const btn = document.getElementById("copy-btn")
-
-        btn.addEventListener("click", (e) => {
-            e.preventDefault()
-            var element = document.getElementById("prompt");
-            clipboard_copy(element)
-        })
-
-        const generateQuizBtn = document.getElementById('generate-quiz');
-        const quizDataInput = document.getElementById('quiz-data');
-        const quizNameInput = document.getElementById('quiz-name');
-     
-
-        const styles = document.getElementById('text_styles').textContent
-
-        generateQuizBtn.addEventListener('click', (e) => {
-            e.preventDefault()
-
-            let quizData
-            try {
-                quizData = JSON.parse(quizDataInput.value) // Parsing the quiz data from JSON
-                console.dir(quizData)
-            } catch (e) {
-                console.error(e)
-                alert("Please use the prompt in the box to generate the quiz questions.")
-                return false;
-            }
-
-            const quizName = quizNameInput.value || "Quiz"; // Fetching the quiz name or using a default
-
-
-
-            const quiz_document = document.getElementById("quiz_html").contentWindow.document
-            const styleEl = quiz_document.createElement("style")
-            styleEl.textContent = styles
-
-            const conDiv = quiz_document.createElement("div")
-            conDiv.classList.add('quiz-container')
-            conDiv.id = "quiz-container"
-            conDiv.innerHTML = `<div id="question-container">
-            <!-- Question and options will be loaded here -->
-        </div>
-        <div id="feedback" class="feedback hidden"></div>
-        <div class="btn" id="check-btn">Check</div>
-        <div class="btn hidden" id="next-btn">Next</div>
-        <div id="counter" class="question-count">
-           Question: <span id="q_n">1</span> of <span id="q_t">~</span>
-        </div>
-        <div id="result-container" class="result-container hidden">
-            <p class="result" id="final-result"></p>
-            <div class="btn retry-btn" id="retry-btn">Retry</div>
-        </div>`
-
-            const quiz_body = quiz_document.getElementsByTagName("body")[0]
-            quiz_body.dataset.questions = JSON.stringify(quizData)
-
-            const scriptContent = document.getElementById("script_content").textContent
-            // Create a new script element and append it to the page
-            const scriptElement = quiz_document.createElement('script')
-            scriptElement.textContent = scriptContent.trim()
-
-            quiz_body.appendChild(styleEl)
-            quiz_body.appendChild(conDiv)
-            //quiz_body.appendChild(codeElement)     
-            quiz_body.appendChild(scriptElement)
-
-            quizHTML = quiz_document.documentElement.innerHTML
-            
-            // Create a Blob object from the HTML string
-            const blob = new Blob([quizHTML], { type: 'text/html' });
-            // Create a temporary URL for the Blob
-            const url = URL.createObjectURL(blob);
-            
-            const downloadLink = document.getElementById('download-link');
-            // Set the download link's href to the temporary URL
-            downloadLink.href = url;
-            // Display the download link
-            downloadLink.classList.remove('is-hidden')
-            generateQuizBtn.classList.add('is-hidden')
-        });
-
-    </script>
-</body>
-
-</html>
+    const quizHTML = quiz_document.documentElement.innerHTML;
+    const blob = new Blob([quizHTML], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const downloadLink = document.getElementById('download-link');
+    downloadLink.href = url;
+    downloadLink.classList.remove('is-hidden');
+    generateQuizBtn.classList.add('is-hidden');
+  });
+</script>

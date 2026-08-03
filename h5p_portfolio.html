@@ -1,52 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
+---
+layout: layout.njk
+title: H5P Portfolio
+permalink: /h5p_portfolio.html
+---
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Modern HTML5 boilerplate for a portfolio project.">
-    <title>H5P Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Replace @latest with a specific version, e.g., @3.9.0, for production -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/h5p-standalone@latest/dist/styles/h5p.css">
-    <script src="https://cdn.jsdelivr.net/npm/h5p-standalone@latest/dist/main.bundle.js" charset="UTF-8"></script>
-</head>
+<header>
+  <h1 class="title">H5P Portfolio</h1>
+</header>
+<main>
+  <section>
+    <h2 class="subtitle">Welcome</h2>
+    <p>This is a modern HTML5 boilerplate for your portfolio project.</p>
+  </section>
 
-<body>
-    <header>
-        <h1>H5P Portfolio</h1>
-    </header>
-    <main>
-        <section>
-            <h2>Welcome</h2>
-            <p>This is a modern HTML5 boilerplate for your portfolio project.</p>
-        </section>
-        <div id="h5p-container"></div>
+  <div class="buttons" id="activity-buttons"></div>
+  <div id="activity-panels"></div>
+  <script id="h5p-activity-data" type="application/json">{{ h5pActivities | json }}</script>
+  <script src="https://cdn.jsdelivr.net/npm/h5p-standalone@latest/dist/main.bundle.js"></script>
+</main>
+<footer>
+  <p>&copy; 2026 Paul Sijpkes</p>
+</footer>
+<script defer>
+  document.addEventListener('DOMContentLoaded', function () {
+    const activityData = JSON.parse(document.getElementById('h5p-activity-data').textContent || '[]');
+    const activities = activityData.map((activity) => ({
+      name: activity.name,
+      label: activity.label,
+      path: activity.path
+    }));
 
-        <script src="https://cdn.jsdelivr.net/npm/h5p-standalone@latest/dist/main.bundle.js"></script>
+    const buttonContainer = document.getElementById('activity-buttons');
+    const panelContainer = document.getElementById('activity-panels');
 
+    if (!activities.length) {
+      panelContainer.innerHTML = '<p>No H5P activities found.</p>';
+      return;
+    }
 
-    </main>
-    <footer>
-        <p>&copy; 2026 Paul Sijpkes</p>
-    </footer>
-    <script defer>
-        document.addEventListener('DOMContentLoaded', function () {
+    activities.forEach((activity, index) => {
+      const button = document.createElement('button');
+      button.className = 'button is-link';
+      button.textContent = activity.label;
+      button.addEventListener('click', () => showActivity(activity.name));
+      buttonContainer.appendChild(button);
 
-            const options = {
-                h5pJsonPath: 'h5p/your-leadership-skills-w6-cmns1031-my-1292911338129535249/', // Path to your self-hosted H5P content directory
-                frameJs: 'https://cdn.jsdelivr.net/npm/h5p-standalone@latest/dist/frame.bundle.js',
-                frameCss: 'https://cdn.jsdelivr.net/npm/h5p-standalone@latest/dist/styles/h5p.css',
-            };
+      const panel = document.createElement('div');
+      panel.id = `h5p-${activity.name}`;
+      panel.style.display = index === 0 ? 'block' : 'none';
+      panel.className = 'mt-4';
+      panelContainer.appendChild(panel);
 
-            const el = document.getElementById('h5p-container');
+      const options = {
+        h5pJsonPath: activity.path,
+        frameJs: 'https://cdn.jsdelivr.net/npm/h5p-standalone@latest/dist/frame.bundle.js',
+        frameCss: 'https://cdn.jsdelivr.net/npm/h5p-standalone@latest/dist/styles/h5p.css',
+      };
 
-            // H5PStandalone is globally available when main.bundle.js is included via a script tag
-            new H5PStandalone.H5P(el, options);
+      new H5PStandalone.H5P(panel, options);
+    });
 
-        });
-    </script>
-</body>
-
-</html>
+    function showActivity(name) {
+      Array.from(panelContainer.children).forEach((panel) => {
+        panel.style.display = panel.id === `h5p-${name}` ? 'block' : 'none';
+      });
+    }
+  });
+</script>

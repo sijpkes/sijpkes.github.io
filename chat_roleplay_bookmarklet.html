@@ -1,84 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
+---
+layout: layout.njk
+title: Chat Roleplay Helper
+permalink: /chat_roleplay_bookmarklet.html
+---
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Chat Roleplay Helper</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <style>
-        body {
-            padding: 20px;
-        }
+<section class="section">
+  <div class="container content">
+    <h1 class="title">Chat Roleplay Helper</h1>
+    <p>Drag this to your browser bookmarks bar:</p><br>
 
-        h3 {
-            margin-top: 20px;
-        }
+    <iframe style="overflow-y: hidden; height: 60px;" title="embedded content" src="https://sijpkes.github.io/chat_roleplay_embed.html" width="100%" height="60"></iframe>
 
-        .highlight {
-            color: red;
-            border: thick solid orange;
-            padding: 5px;
-            border-radius: 5px;
-            display: inline-block;
-        }
+    <h3>What it does:</h3>
+    <ol>
+      <li>
+        <p>Clicking the <a href="chat_roleplay_embed.html">ChatGPT roleplay button</a> makes a mess:</p>
+        <p><img src="img/gpt_messy.png" width="350" /></p>
+      </li>
+      <li>
+        <p>Just click the bookmark and it cleans up the page.</p>
+        <p><img src="img/gpt_clean.png" width="350" /></p>
+      </li>
+    </ol>
 
-        .hidden {
-            display: none;
-        }
-    </style>
-</head>
+    <h2>Embed it in the LMS</h2>
+    <textarea class="input textarea" readonly="true" aria-readonly="true" id="embed" rows="3">
+      <iframe style="overflow-y: hidden; height: 60px;" title="embedded content" src="https://sijpkes.github.io/chat_roleplay_embed.html" width="100%" height="60"></iframe>
+    </textarea>
+    <button class="button is-primary" onclick="copyToClipboard()">Copy to Clipboard</button>
+  </div>
+</section>
 
-<body>
-    <!--[if lt IE 7]>
-        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+<style>
+  .highlight { color: red; border: thick solid orange; padding: 5px; border-radius: 5px; display: inline-block; }
+  .hidden { display: none; }
+</style>
 
-    <div class="content">
-        <h1 class="title">Chat Roleplay Helper</h1>
-        <p>Drag this to your browser bookmarks bar:</p><br>
-
-        <iframe style="overflow-y: hidden; height: 60px;" title="embedded content" src="https://sijpkes.github.io/chat_roleplay_embed.html" width="100%" height="60">
-        </iframe>
-
-        <h3>What it does:</h3>
-    
-        <ol>
-            <li>
-                <p>Clicking the <a hfre="chat_roleplay_embed.html">ChatGPT roleplay button</a> makes a mess:</p>
-                <p>
-                    <img src="img/gpt_messy.png" width="350" />
-                </p>
-            </li>
-            <li>
-                <p>
-                   Just click the bookmark and it cleans up the page.
-                <p>
-                    <img src="img/gpt_clean.png" width="350" />
-                </p>
-                </p>
-            </li>
-        </ol>
-
-        <h2>Embed it in the LMS</h2>
-      
-        <textarea class="input textarea" readonly="true" aria-readonly="true" id="embed" rows="3">
-            <iframe style="overflow-y: hidden; height: 60px;" title="embedded content" src="https://sijpkes.github.io/chat_roleplay_embed.html" width="100%" height="60">
-            </iframe>
-        </textarea>
-        <button class="button is-primary" onclick="copyToClipboard()">Copy to Clipboard</button>
-    </div>
-    <script type="text/javascript">
-        function copyToClipboard() {
-            const resultTextarea = document.getElementById('embed');
-            resultTextarea.select();
-            document.execCommand('copy');
-            alert('Copied to clipboard.');
-        }
-    </script>
-    </div>
-</body>
-
-</html>
+<script type="text/javascript">
+  function copyToClipboard() {
+    const resultTextarea = document.getElementById('embed');
+    resultTextarea.select();
+    document.execCommand('copy');
+    alert('Copied to clipboard.');
+  }
+</script>

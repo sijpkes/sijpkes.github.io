@@ -1,63 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+---
+layout: layout.njk
+title: ChatGPT Roleplay Button Maker
+permalink: /chatgpt_rpgen.html
+---
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatGPT Roleplay Button Maker</title>
-    <!-- Bulma CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <style>
-        body {
-            padding: 20px;
-        }
-
-        .preview {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #005a9c;
-            color: white;
-            font-size: 16px;
-            font-family: Arial, sans-serif;
-            border-radius: 5px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .preview img {
-            display: block;
-            margin: 0 auto 10px;
-            border-radius: 50%;
-            width: 100px;
-            height: 100px;
-        }
-
-        textarea {
-            resize: none;
-        }
-    </style>
-</head>
-
-<body>
-
-    <section class="section">
-        <div class="container">
-            <h1 class="title">Make a ChatGPT Roleplay Button</h1>
-            <p class="subtitle">Follow the instructions below:</p>
-            <div class="content">
-
-
-                <form id="linkForm">
-                    <div class="field">
-                        <label class="label" for="prompt">1. Write the Prompt</label>
-                        <div class="control">
-                            <textarea class="textarea" id="prompt" name="prompt" rows="6"
-                                placeholder="Enter your prompt here..." required>Roleplay Scenario:
+<section class="section">
+  <div class="container">
+    <h1 class="title">Make a ChatGPT Roleplay Button</h1>
+    <p class="subtitle">Follow the instructions below:</p>
+    <div class="content">
+      <form id="linkForm">
+        <div class="field">
+          <label class="label" for="prompt">1. Write the Prompt</label>
+          <div class="control">
+            <textarea class="textarea" id="prompt" name="prompt" rows="6" placeholder="Enter your prompt here..." required>Roleplay Scenario:
 
 You will take on the role of William, a 60-year-old man with stage IV colorectal cancer with liver metastases. Your liver function is deteriorating, and your prognosis is poor. You are under the care of a GP and a community care team.
-    
+
 Instructions:
-    
+
 Roleplay William to provide a learning experience for a trainee palliative care nurse.
 Use a realistic Australian accent and speech style reflective of a person from a regional area of Australia.
 
@@ -74,84 +35,93 @@ Pause and wait for input from the nurse after each interaction.
 Case Study Background:
 
 William's Background: William grew up in a large family in a regional area of Australia. He has witnessed significant advancements in healthcare and life expectancy, including improvements in immunization, antibiotics, medical technology, aged care facilities, and government support for life-limiting illnesses.
-Current Concerns: William is worried about recent changes in his bowel habits and has sought advice from his GP. Until now, he believed he would live to a "ripe old age" and hasn't contemplated dying before then.  
-    
-                        </textarea>
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <label class="label" for="imageUrl">2. Paste the Image Address for the portrait/icon.</label>
-                        <div class="control">
-                            <input class="input" type="url" id="imageUrl" name="imageUrl"
-                                placeholder="Enter Image URL from Canvas"
-                                value="https://upload.wikimedia.org/wikipedia/commons/b/b9/WTF_Josh_Bluntschli_Aussie_bloke.jpg"
-                                required>
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <label class="label" for="buttonLabel">3. Set the button label.</label>
-                        <div class="control">
-                            <input class="input" type="text" id="buttonLabel" name="buttonLabel"
-                                placeholder="Enter button label..." value="Start Roleplay" required>
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <label class="label">4. Check out the preview.</label>
-                        <div id="preview" class="preview" style="display:none;"></div>
-                    </div>
-                    <div class="field">
-                        <label class="label">5. Like it? Good! Now just embed it into your course.</label>
-                        <textarea id="result" class="textarea" readonly style="height: 100px;"></textarea><br>
-                        <button class="button is-info" onclick="copyToClipboard()">Copy to Clipboard</button>
-                    </div>
-                </form>
-            </div>
-            <strong>Your done!</strong>
-            <p>Use the <a href="chat_roleplay_bookmarklet.html">Roleplay Helper bookmark</a> to allow users to remove the first prompt in ChatGPT.</a></p>
+Current Concerns: William is worried about recent changes in his bowel habits and has sought advice from his GP. Until now, he believed he would live to a "ripe old age" and hasn't contemplated dying before then.
+            </textarea>
+          </div>
         </div>
-    </section>
 
-    <script>
-        const form = document.getElementById('linkForm')
+        <div class="field">
+          <label class="label" for="imageUrl">2. Paste the Image Address for the portrait/icon.</label>
+          <div class="control">
+            <input class="input" type="url" id="imageUrl" name="imageUrl" placeholder="Enter Image URL from Canvas" value="https://upload.wikimedia.org/wikipedia/commons/b/b9/WTF_Josh_Bluntschli_Aussie_bloke.jpg" required>
+          </div>
+        </div>
 
-        form.addEventListener('submit', e => e.preventDefault())
+        <div class="field">
+          <label class="label" for="buttonLabel">3. Set the button label.</label>
+          <div class="control">
+            <input class="input" type="text" id="buttonLabel" name="buttonLabel" placeholder="Enter button label..." value="Start Roleplay" required>
+          </div>
+        </div>
 
-        function generateLink() {
-            const prompt = encodeURIComponent(document.getElementById('prompt').value);
-            const imageUrl = document.getElementById('imageUrl').value;
-            const buttonLabel = document.getElementById('buttonLabel').value;
-            const baseUrl = 'https://chatgpt.com?model=4&q=';
-            const link = `${baseUrl}${prompt}`;
+        <div class="field">
+          <label class="label">4. Check out the preview.</label>
+          <div id="preview" class="preview" style="display:none;"></div>
+        </div>
+        <div class="field">
+          <label class="label">5. Like it? Good! Now just embed it into your course.</label>
+          <textarea id="result" class="textarea" readonly style="height: 100px;"></textarea><br>
+          <button class="button is-info" onclick="copyToClipboard()">Copy to Clipboard</button>
+        </div>
+      </form>
+    </div>
+    <strong>Your done!</strong>
+    <p>Use the <a href="chat_roleplay_bookmarklet.html">Roleplay Helper bookmark</a> to allow users to remove the first prompt in ChatGPT.</p>
+  </div>
+</section>
 
-            // Update the result textarea with the generated link
-            const resultTextarea = document.getElementById('result');
-            resultTextarea.value = `<a href="${link}" target="_blank" style="text-decoration:none; display: inline-block; padding: 10px 20px; background-color: #005a9c; color: white; font-size: 16px; font-family: Arial, sans-serif; border-radius: 5px;" aria-label="Start roleplay">\n<img src="${imageUrl}" alt="Portrait" style="display: block; margin: 0 auto 10px; border-radius: 50%; width: 100px; height: 100px;">\n${buttonLabel}\n</a>`;
+<style>
+  .preview {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #005a9c;
+    color: white;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
 
-            // Display the preview
-            const previewDiv = document.getElementById('preview');
-            previewDiv.style.display = 'inline-block';
-            previewDiv.innerHTML = `<img src="${imageUrl}" alt="Portrait"><div>${buttonLabel}</div>`;
-        }
+  .preview img {
+    display: block;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+  }
 
-        function copyToClipboard() {
-            const resultTextarea = document.getElementById('result');
-            resultTextarea.select();
-            document.execCommand('copy');
-            alert('Link copied to clipboard.');
-        }
+  textarea { resize: none; }
+</style>
 
-        // Event listeners to regenerate the preview when inputs change
-        document.getElementById('prompt').addEventListener('input', generateLink);
-        document.getElementById('imageUrl').addEventListener('input', generateLink);
-        document.getElementById('buttonLabel').addEventListener('input', generateLink);
+<script>
+  const form = document.getElementById('linkForm');
+  form.addEventListener('submit', e => e.preventDefault());
 
-        // Automatically generate preview when page loads
-        window.onload = generateLink;
-    </script>
+  function generateLink() {
+    const prompt = encodeURIComponent(document.getElementById('prompt').value);
+    const imageUrl = document.getElementById('imageUrl').value;
+    const buttonLabel = document.getElementById('buttonLabel').value;
+    const baseUrl = 'https://chatgpt.com?model=4&q=';
+    const link = `${baseUrl}${prompt}`;
 
-</body>
+    const resultTextarea = document.getElementById('result');
+    resultTextarea.value = `<a href="${link}" target="_blank" style="text-decoration:none; display: inline-block; padding: 10px 20px; background-color: #005a9c; color: white; font-size: 16px; font-family: Arial, sans-serif; border-radius: 5px;" aria-label="Start roleplay">\n<img src="${imageUrl}" alt="Portrait" style="display: block; margin: 0 auto 10px; border-radius: 50%; width: 100px; height: 100px;">\n${buttonLabel}\n</a>`;
 
-</html>
+    const previewDiv = document.getElementById('preview');
+    previewDiv.style.display = 'inline-block';
+    previewDiv.innerHTML = `<img src="${imageUrl}" alt="Portrait"><div>${buttonLabel}</div>`;
+  }
+
+  function copyToClipboard() {
+    const resultTextarea = document.getElementById('result');
+    resultTextarea.select();
+    document.execCommand('copy');
+    alert('Link copied to clipboard.');
+  }
+
+  document.getElementById('prompt').addEventListener('input', generateLink);
+  document.getElementById('imageUrl').addEventListener('input', generateLink);
+  document.getElementById('buttonLabel').addEventListener('input', generateLink);
+  window.onload = generateLink;
+</script>

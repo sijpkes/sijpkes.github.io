@@ -1,132 +1,114 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relationship Cards</title>
-    <style>
-:root {
-  --background-color: #F5F5F5;
-  --card-background: #FFFFFF;
-  --text-color: #333333;
-  --heading-color: #6B8EAD;
-  --quote-color: #8A89C7;
-  --shadow-color: rgba(0, 0, 0, 0.1);
-}
+---
+layout: layout.njk
+title: Relationship Cards
+permalink: /generic_cards2.html
+---
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  padding: 20px;
-}
+<style>
+  :root {
+    --background-color: #F5F5F5;
+    --card-background: #FFFFFF;
+    --text-color: #333333;
+    --heading-color: #6B8EAD;
+    --quote-color: #8A89C7;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+  }
 
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    padding: 20px;
+  }
 
-.card {
-  background-color: var(--card-background);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 4px 12px var(--shadow-color);
-  padding: 30px;
-  max-width: 350px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px var(--shadow-color);
-}
+  .card {
+    background-color: var(--card-background);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 12px var(--shadow-color);
+    padding: 30px;
+    max-width: 350px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
-.card h2 {
-  color: var(--heading-color);
-  font-size: 1.5rem;
-  margin-top: 0;
-  margin-bottom: 15px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px var(--shadow-color);
+  }
 
-.card .card-icon {
-  margin: 10px auto 20px;
-  height: 0;
-  font-size: 6rem;
-  line-height: 0;
-  opacity: 0.3
-}
+  .card h2 {
+    color: var(--heading-color);
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
 
-.card .quote {
-  font-style: italic;
-  color: var(--quote-color);
-  font-size: 1.1rem;
-  margin: 15px 0;
-}
+  .card .card-icon {
+    margin: 10px auto 20px;
+    height: 0;
+    font-size: 6rem;
+    line-height: 0;
+    opacity: 0.3;
+  }
 
-.card .description {
-  font-size: 1rem;
-  line-height: 1.6;
-}
-    </style>
-</head>
-<body>
-  <div class="card-container">
+  .card .quote {
+    font-style: italic;
+    color: var(--quote-color);
+    font-size: 1.1rem;
+    margin: 15px 0;
+  }
 
-    <div class="card card-1">
-      <h2>Card 1: Focus on Understanding</h2>
-      <div class="card-icon">
-        <h1>🫂</h1>
-      </div>
-      <p class="description">An argument doesn't have to be a battle where one person wins and the other loses. Instead, approach the conversation with the goal of understanding the other person's perspective. By focusing on empathy, you can work together to find a resolution that benefits you both.</p>
-      <p class="quote">“What can we do to solve this?”</p>
-    </div>
-  
-    <div class="card card-2">
-      <h2>Card 2: Explain Your Why</h2>
-      <div class="card-icon">
-        <h1>📜</h1>
-        </div>
-      <p class="description">People are moved by stories, not just facts. To get your point across, share a personal story about why this issue matters to you. Explaining your perspective through narrative helps the other person understand where you're coming from and makes them more likely to listen and connect.</p>
-      <p class="quote">“This issue is important to me because…”</p>
-    </div>
-  
-    <div class="card card-3">
-      <h2>Card 3: Find Common Ground</h2>
-      <div class="card-icon">
-        <h1>🔗</h1>
-        </div>
-      <p class="description">When a conversation becomes tense, look for the things you both agree on. Finding commonalities—even small ones—can be the foundation that holds the conversation together. These shared values or goals can help you move forward together, even when you disagree on other points.</p>
-      <p class="quote">“We both want a fair outcome.”</p>
-    </div>
-  
-    <div class="card card-4">
-      <h2>Card 4: Take a Pause</h2>
-      <div class="card-icon">
-        <h1>⏸️</h1>
-        </div>
-      <p class="description">When a conversation gets heated, it's normal to feel an urge to fight, flee, or freeze. These reactions can cause you to say or do something you later regret. When you feel this happening, take a moment to pause and breathe. Regaining control of your emotions allows you to respond with purpose instead of reacting impulsively.</p>
-      <p class="quote">Breathe, count to three, then respond.</p>
-    </div>
-  
-    <div class="card card-5">
-      <h2>Card 5: End with Respect</h2>
-      <div class="card-icon">
-        <h1>🏆</h1>
-        </div>
-      <p class="description">You don't have to walk away from a disagreement in a way that damages your relationship. Even if you don't reach a full agreement, you can end the conversation with integrity by making one clear, respectful point. Ending with dignity is always better than leaving the relationship in pieces.</p>
-      <p class="quote">One clear point, said with respect.</p>
-    </div>
-  
+  .card .description { font-size: 1rem; line-height: 1.6; }
+</style>
+
+<div class="card-container">
+  <div class="card card-1">
+    <h2>Card 1: Focus on Understanding</h2>
+    <div class="card-icon"><h1>🫂</h1></div>
+    <p class="description">An argument doesn't have to be a battle where one person wins and the other loses. Instead, approach the conversation with the goal of understanding the other person's perspective. By focusing on empathy, you can work together to find a resolution that benefits you both.</p>
+    <p class="quote">“What can we do to solve this?”</p>
   </div>
 
-</body>
-</html>
+  <div class="card card-2">
+    <h2>Card 2: Explain Your Why</h2>
+    <div class="card-icon"><h1>📜</h1></div>
+    <p class="description">People are moved by stories, not just facts. To get your point across, share a personal story about why this issue matters to you. Explaining your perspective through narrative helps the other person understand where you're coming from and makes them more likely to listen and connect.</p>
+    <p class="quote">“This issue is important to me because…”</p>
+  </div>
+
+  <div class="card card-3">
+    <h2>Card 3: Find Common Ground</h2>
+    <div class="card-icon"><h1>🔗</h1></div>
+    <p class="description">When a conversation becomes tense, look for the things you both agree on. Finding commonalities—even small ones—can be the foundation that holds the conversation together. These shared values or goals can help you move forward together, even when you disagree on other points.</p>
+    <p class="quote">“We both want a fair outcome.”</p>
+  </div>
+
+  <div class="card card-4">
+    <h2>Card 4: Take a Pause</h2>
+    <div class="card-icon"><h1>⏸️</h1></div>
+    <p class="description">When a conversation gets heated, it's normal to feel an urge to fight, flee, or freeze. These reactions can cause you to say or do something you later regret. When you feel this happening, take a moment to pause and breathe. Regaining control of your emotions allows you to respond with purpose instead of reacting impulsively.</p>
+    <p class="quote">Breathe, count to three, then respond.</p>
+  </div>
+
+  <div class="card card-5">
+    <h2>Card 5: End with Respect</h2>
+    <div class="card-icon"><h1>🏆</h1></div>
+    <p class="description">You don't have to walk away from a disagreement in a way that damages your relationship. Even if you don't reach a full agreement, you can end the conversation with integrity by making one clear, respectful point. Ending with dignity is always better than leaving the relationship in pieces.</p>
+    <p class="quote">One clear point, said with respect.</p>
+  </div>
+</div>
